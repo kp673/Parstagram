@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
         pd= new ProgressDialog(this);
         pd.setTitle("Posting...");
         pd.setMessage("Please wait.");
+        pd.setProgressStyle(R.style.ProgressBar);
         pd.setCancelable(false);
 
         btnCaptureImage.setOnClickListener(new View.OnClickListener() {
