@@ -27,6 +27,20 @@
         android:layout_weight="1"
         android:text="Take a Picture" />
 
+    <ProgressBar
+        android:id="@+id/pbLoading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:foregroundGravity="center"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/insta_blue"
+        android:maxWidth="100dp"
+        android:maxHeight="100dp"
+        android:minWidth="100dp"
+        android:minHeight="100dp"
+        android:visibility="gone" />
+
     <ImageView
         android:id="@+id/ivPreview"
         android:layout_width="wrap_content"

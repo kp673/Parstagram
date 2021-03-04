@@ -4,6 +4,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btnCaptureImage;
     private ImageView ivPreview;
     private Button btnPost;
+    private ProgressDialog pd;
     private File photoFile;
     public String photoFileName = "photo.jpg";
 
@@ -50,6 +52,11 @@ public class MainActivity extends AppCompatActivity {
         ivPreview = (ImageView) findViewById(R.id.ivPreview);
         btnPost = findViewById(R.id.btnPost);
         ivPreview.setVisibility(View.GONE);
+
+        pd= new ProgressDialog(this);
+        pd.setTitle("Posting...");
+        pd.setMessage("Please wait.");
+        pd.setCancelable(false);
 
         btnCaptureImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
                 ParseUser currentUser = ParseUser.getCurrentUser();
+                pd.show();
                 savePost(description, currentUser,photoFile);
             }
         });
@@ -93,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 Log.i(TAG,"Post was successful");
+                pd.dismiss();
                 etCaption.setText("");
                 ivPreview.setImageResource(0);
                 ivPreview.setVisibility(View.GONE);

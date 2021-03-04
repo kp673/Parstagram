@@ -1,68 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_alignParentLeft="true"
-    android:layout_marginStart="16dp"
-    android:layout_marginTop="80dp"
-    android:layout_marginEnd="16dp"
-    android:foregroundTintMode="add"
-    android:orientation="vertical"
-    tools:context=".LoginActivity">
+    android:background="@drawable/backdrop">
 
-    <androidx.constraintlayout.utils.widget.ImageFilterView
-        android:id="@+id/imageFilterView"
-        android:layout_width="350dp"
-        android:layout_height="150dp"
-        android:layout_gravity="center"
-        android:layout_weight="1"
-        android:fadingEdge="horizontal|vertical"
-        app:srcCompat="@drawable/nav_logo_whiteout" />
-
-    <EditText
-        android:id="@+id/etUsername"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:layout_weight="1"
-        android:backgroundTint="@color/insta_purple"
-        android:cursorVisible="true"
-        android:ems="10"
-        android:hint="Username"
-        android:inputType="textEmailAddress"
-        android:textColorHint="#DD2A7B" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:foregroundTintMode="add"
+        android:orientation="vertical"
+        tools:context=".LoginActivity">
 
-    <EditText
-        android:id="@+id/etPassword"
-        android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:layout_weight="1"
-        android:autofillHints=""
-        android:backgroundTint="@color/insta_purple"
-        android:ems="10"
-        android:hint="password"
-        android:inputType="textPassword"
-        android:textColorHint="#DD2A7B" />
+        <androidx.constraintlayout.utils.widget.ImageFilterView
+            android:id="@+id/imageFilterView"
+            android:layout_width="350dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:fadingEdge="horizontal|vertical"
+            app:srcCompat="@drawable/white_banner" />
 
-    <Button
-        android:id="@+id/btnLogin"
-        android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:layout_weight="1"
-        android:background="@color/insta_purple"
-        android:backgroundTint="@color/insta_purple"
-        android:backgroundTintMode="add"
-        android:clickable="true"
-        android:fadingEdge="horizontal|vertical"
-        android:fadingEdgeLength="20dp"
-        android:text="LOG IN"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:iconTint="@color/insta_pink"
-        app:iconTintMode="multiply"
-        android:focusable="true" />
+        <EditText
+            android:id="@+id/etUsername"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/white"
+            android:cursorVisible="true"
+            android:ems="10"
+            android:hint="Username"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white" />
 
-</LinearLayout>
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:layout_weight="1"
+            android:autofillHints=""
+            android:backgroundTint="@color/white"
+            android:ems="10"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white" />
+
+        <Button
+            android:id="@+id/btnLogin"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:layout_weight="1"
+            android:background="@color/insta_purple"
+            android:backgroundTint="@color/insta_purple"
+            android:backgroundTintMode="add"
+            android:clickable="true"
+            android:fadingEdge="horizontal|vertical"
+            android:fadingEdgeLength="20dp"
+            android:focusable="true"
+            android:text="LOG IN"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:iconTint="@color/insta_pink"
+            app:iconTintMode="multiply" />
+
+    </LinearLayout>
+</RelativeLayout>
