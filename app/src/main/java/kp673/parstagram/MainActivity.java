@@ -1,8 +1,10 @@
 package kp673.parstagram;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
+import androidx.fragment.app.Fragment;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -13,12 +15,15 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.parse.FindCallback;
 import com.parse.Parse;
 import com.parse.ParseException;
@@ -38,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btnCaptureImage;
     private ImageView ivPreview;
     private Button btnPost;
+    private BottomNavigationView bottomNavigationView;
     private ProgressDialog pd;
     private File photoFile;
     public String photoFileName = "photo.jpg";
@@ -51,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         btnCaptureImage = findViewById(R.id.btnCaptureImage);
         ivPreview = (ImageView) findViewById(R.id.ivPreview);
         btnPost = findViewById(R.id.btnPost);
+        bottomNavigationView= findViewById(R.id.bottomNavigation);
         ivPreview.setVisibility(View.GONE);
 
         pd= new ProgressDialog(this);
@@ -82,6 +89,26 @@ public class MainActivity extends AppCompatActivity {
                 ParseUser currentUser = ParseUser.getCurrentUser();
                 pd.show();
                 savePost(description, currentUser,photoFile);
+            }
+        });
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Fragment fragment;
+                switch (item.getItemId()) {
+                    case R.id.actionHome:
+                        Toast.makeText(MainActivity.this, "Home", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.actionCompose:
+                        Toast.makeText(MainActivity.this, "Compose", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.actionProfile:
+                    default:
+                        Toast.makeText(MainActivity.this, "Profile", Toast.LENGTH_SHORT).show();
+                        break;
+                }
+                return false;
             }
         });
 
