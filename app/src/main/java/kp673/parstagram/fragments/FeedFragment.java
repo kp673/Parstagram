@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -31,8 +32,9 @@ public class FeedFragment extends Fragment {
 
     public static final String TAG="FeedFragment";
     private RecyclerView rvPosts;
-    private PostsAdapter adapter;
-    private List<Post> allPosts;
+    protected PostsAdapter adapter;
+    protected List<Post> allPosts;
+    protected SwipeRefreshLayout swipeContainer;
     public FeedFragment() {
         // Required empty public constructor
     }
@@ -51,15 +53,31 @@ public class FeedFragment extends Fragment {
         allPosts= new ArrayList<>();
         adapter= new PostsAdapter(getContext(),allPosts);
         rvPosts.setAdapter(adapter);
+        swipeContainer= (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
+
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                clear();
+                queryPost();
+            }
+        });
+        swipeContainer.setColorSchemeResources(android.R.color.holo_green_light,
+                android.R.color.holo_red_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_blue_bright);
+
         rvPosts.setLayoutManager(new LinearLayoutManager(getContext()));
         //create Data source
         queryPost();
     }
 
 
-    private void queryPost(){
+    protected void queryPost(){
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
         query.include(Post.KEY_USER);
+        query.setLimit(20);
+        query.addDescendingOrder(Post.KEY_CREATED_KEY);
         query.findInBackground(new FindCallback<Post>() {
             @Override
             public void done(List<Post> posts, ParseException e) {
@@ -70,9 +88,19 @@ public class FeedFragment extends Fragment {
                 for (Post post: posts){
                     Log.i(TAG, "Post: "+post.getDescription()+ " username: "+post.getUser().getUsername());
                 }
-                allPosts.addAll(posts);
-                adapter.notifyDataSetChanged();
+                addAll(posts);
+                swipeContainer.setRefreshing(false);
             }
         });
+    }
+
+    public void clear(){
+        allPosts.clear();
+        adapter.notifyDataSetChanged();
+    }
+
+    public void addAll(List<Post> posts){
+        allPosts.addAll(posts);
+        adapter.notifyDataSetChanged();
     }
 }

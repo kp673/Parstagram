@@ -13,6 +13,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import kp673.parstagram.fragments.ComposeFragment;
 import kp673.parstagram.fragments.FeedFragment;
+import kp673.parstagram.fragments.ProfileFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.actionProfile:
                     default:
                         Toast.makeText(MainActivity.this, "Profile", Toast.LENGTH_SHORT).show();
-                        fragment= new ComposeFragment();
+                        fragment= new ProfileFragment();
                         break;
                 }
                 fragmentManager.beginTransaction().replace(R.id.flContainer,fragment).commit();
