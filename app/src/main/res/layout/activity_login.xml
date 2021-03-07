@@ -55,12 +55,11 @@
             android:textColorHint="@color/white" />
 
         <Button
+            android:background="@color/insta_blue"
             android:id="@+id/btnLogin"
             android:layout_width="match_parent"
             android:layout_height="65dp"
             android:layout_weight="1"
-            android:background="@color/insta_purple"
-            android:backgroundTint="@color/insta_purple"
             android:backgroundTintMode="add"
             android:clickable="true"
             android:fadingEdge="horizontal|vertical"

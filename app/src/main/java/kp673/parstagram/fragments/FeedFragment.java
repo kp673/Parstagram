@@ -21,6 +21,7 @@ import com.parse.ParseQuery;
 import java.util.ArrayList;
 import java.util.List;
 
+import kp673.parstagram.EndlessRecyclerViewScrollListner;
 import kp673.parstagram.Post;
 import kp673.parstagram.PostsAdapter;
 import kp673.parstagram.R;
@@ -35,6 +36,9 @@ public class FeedFragment extends Fragment {
     protected PostsAdapter adapter;
     protected List<Post> allPosts;
     protected SwipeRefreshLayout swipeContainer;
+    protected EndlessRecyclerViewScrollListner scrollListner;
+    private LinearLayoutManager linearLayoutManager;
+
     public FeedFragment() {
         // Required empty public constructor
     }
@@ -66,10 +70,17 @@ public class FeedFragment extends Fragment {
                 android.R.color.holo_red_light,
                 android.R.color.holo_orange_light,
                 android.R.color.holo_blue_bright);
+       linearLayoutManager= new LinearLayoutManager(getContext());
+       rvPosts.setLayoutManager(linearLayoutManager);
 
-        rvPosts.setLayoutManager(new LinearLayoutManager(getContext()));
-        //create Data source
+        scrollListner = new EndlessRecyclerViewScrollListner(linearLayoutManager) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+                queryPost();
+            }
+        };
         queryPost();
+        rvPosts.addOnScrollListener(scrollListner);
     }
 
 
